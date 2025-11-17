@@ -1,4 +1,4 @@
-name: Deploy Astro site to GitHub Pages
+name: Deploy Astro to GitHub Pages
 
 on:
   push:
@@ -15,17 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      # Setup Node (GitHub hosts will install everything for you)
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      # Install + Build your site
-      - run: npm install
+      - run: npm install --legacy-peer-deps
       - run: npm run build
-
-      # Upload build output
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
